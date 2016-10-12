@@ -160,7 +160,8 @@ public class ForegroundService extends Service {
                 .setContentText(settings.optString("text", ""))
                 .setTicker(settings.optString("ticker", ""))
                 .setOngoing(true)
-                .setSmallIcon(getIconResId());
+                .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), getIconResId()))
+                .setSmallIcon(getSmallIconResId());
 
         setColor(notification, settings);
 
@@ -207,13 +208,27 @@ public class ForegroundService extends Service {
         Context context = getApplicationContext();
         Resources res   = context.getResources();
         String pkgName  = context.getPackageName();
-        String icon     = settings.optString("icon", "icon");
 
-        int resId = res.getIdentifier(icon, "drawable", pkgName);
+        int resId;
+        resId = res.getIdentifier(settings.optString("icon", "icon"), "drawable", pkgName);
 
-        if (resId == 0) {
-            resId = res.getIdentifier("icon", "drawable", pkgName);
-        }
+        return resId;
+    }
+
+    /**
+     * Retrieves the resource ID of the app icon.
+     *
+     * @return
+     *      The resource ID of the app icon
+     */
+    private int getSmallIconResId() {
+        JSONObject settings = BackgroundMode.getSettings();
+        Context context = getApplicationContext();
+        Resources res   = context.getResources();
+        String pkgName  = context.getPackageName();
+
+        int resId;
+        resId = res.getIdentifier(settings.optString("smallIcon", "icon"), "drawable", pkgName);
 
         return resId;
     }
