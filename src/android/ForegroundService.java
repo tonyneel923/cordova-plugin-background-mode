@@ -102,7 +102,7 @@ public class ForegroundService extends Service {
         boolean isSilent    = settings.optBoolean("silent", false);
 
         if (!isSilent) {
-            startForeground(NOTIFICATION_ID, makeNotification());
+//             startForeground(NOTIFICATION_ID, makeNotification());
         }
 
         PowerManager powerMgr = (PowerManager)
