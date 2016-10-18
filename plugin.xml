@@ -43,7 +43,7 @@
         <!-- The app is able to run in background through audio mode -->
         <config-file target="*-Info.plist" parent="UIBackgroundModes">
             <array>
-                <string>fetch</string>
+                <string>location</string>
             </array>
         </config-file>
 
